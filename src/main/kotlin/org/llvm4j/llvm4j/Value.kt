@@ -2143,6 +2143,10 @@ public class AllocaInstruction public constructor(ptr: LLVMValueRef) : UnaryInst
 
         return Type(allocated)
     }
+
+    public fun getLValue(): Value {
+        return this
+    }
 }
 
 @CorrespondsTo("llvm::CastInst")
@@ -2156,7 +2160,12 @@ public class ExtractValueInstruction public constructor(ptr: LLVMValueRef) :
 @CorrespondsTo("llvm::LoadInst")
 public class LoadInstruction public constructor(ptr: LLVMValueRef) :
     UnaryInstruction(ptr),
-    Instruction.MemoryAccessorInstructionImpl
+    Instruction.MemoryAccessorInstructionImpl {
+
+    public fun getLValue(): Value {
+        return this
+    }
+}
 
 @CorrespondsTo("llvm::VAArgInst")
 public class VAArgInstruction public constructor(ptr: LLVMValueRef) : UnaryInstruction(ptr)
@@ -2439,6 +2448,9 @@ public class PhiInstruction public constructor(ptr: LLVMValueRef) : Instruction(
         } else {
             Err(IndexOutOfBoundsException("Index $index out of bounds for size $size"))
         }
+    }
+    public fun getLValue(): Value {
+        return this
     }
 }
 

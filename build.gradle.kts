@@ -15,13 +15,11 @@ repositories {
 }
 
 dependencies {
-    api("org.bytedeco:llvm-platform:13.0.1-1.5.7")
     implementation("org.bytedeco:llvm-platform:13.0.1-1.5.7")
-    api("org.llvm4j:optional:0.2.0-SNAPSHOT")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0") // 使用 Kotlin 1.9.0
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0") // Kotlin 1.9.0
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.0") // 使用 Kotlin 1.9.0
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0") // 使用 JUnit 5.9.0
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.0") // Kotlin 1.9.0
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0") // JUnit 5.9.0
 }
 
 tasks {
@@ -48,7 +46,7 @@ tasks {
         manifest {
         }
         from(sourceSets["main"].output)
-        from(configurations.runtimeClasspath.get().filter { it.name.contains("optional") || it.name.contains("kotlin-stdlib-jdk8") }.map { zipTree(it) })
+        from(configurations.runtimeClasspath.get().filter { it.name.contains("kotlin-stdlib-jdk8") }.map { zipTree(it) })
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 
